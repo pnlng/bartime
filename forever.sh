@@ -1,0 +1,1 @@
+forever start -a dist/server.js

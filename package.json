@@ -1,0 +1,50 @@
+{
+  "name": "bartime",
+  "version": "0.1.0",
+  "author": "pnlng @pnlng",
+  "bugs": "https://github.com/pnlng/bartime/issues",
+  "dependencies": {
+    "@hapi/boom": "^9.0.0",
+    "conf": "^6.2.0",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "node-notifier": "^6.0.0",
+    "object.fromentries": "^2.0.2",
+    "open": "^7.0.0",
+    "pretty-ms": "^5.1.0",
+    "url-search-params-polyfill": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/hapi__boom": "^9.0.1",
+    "@types/node": "^10",
+    "@types/node-notifier": "^5.4.0",
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
+    "eslint": "^5.13",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "globby": "^10",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "ts-node": "^8",
+    "tslib": "^1",
+    "typescript": "^3.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "homepage": "https://github.com/pnlng/bartime",
+  "keywords": [ "timer", "express", "touchbar" ],
+  "license": "MIT",
+  "main": "dist/server.js",
+  "repository": "pnlng/bartime",
+  "scripts": {
+    "server": "ts-node src/server.ts",
+    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
+    "build-ts": "tsc",
+    "build": "yarn run build-ts && yarn run lint",
+    "freeze": "nexe dist/server.js -t macos-x64-v8.4.0 -n bartime",
+    "dist": "yarn run build && yarn run freeze"
+  }
+}
