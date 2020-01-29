@@ -28,8 +28,8 @@ Enable external scripting through Preferences -> Scripting BTT.
 
 Download BarTime's BTT presets and install them. 
 
-- Touch Bar Preset
-- Named Preset
+- [Touch Bar Preset](https://github.com/pnlng/bartime/releases/latest/download/BarTime.bttpreset)
+- [Named Trigger Preset](https://github.com/pnlng/bartime/releases/latest/download/BarTime_long_press.bttpreset)
 
 ### BarTime Server
 
