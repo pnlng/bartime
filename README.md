@@ -50,7 +50,7 @@ node dist/server.js
 
 #### Daemon & Login Item
 
-You may want to run BarTime as a daemon, in that case, you could use `forever.`
+You may want to run BarTime as a daemon. In that case, you could use `forever.`
 
 ```
 # npm
@@ -64,6 +64,13 @@ Then the included script `forever.sh` will run BarTime as a daemon.
 ```sh
 sh forever.sh
 ```
+
+There are a few ways to launch the above script at login. 
+
+- [Native solutions](https://stackoverflow.com/questions/6442364/running-script-upon-login-mac) as discussed on Stack Overflow (Automator, `launchd`, etc)
+- Paid third-party apps:
+  - [Keyboard Maestro](https://www.keyboardmaestro.com/main/)
+  - [Lingon](https://www.peterborgapps.com/lingon/)
 
 ## Usage and Configuration
 
