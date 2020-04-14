@@ -35,7 +35,11 @@
     "node": ">=8.0.0"
   },
   "homepage": "https://github.com/pnlng/bartime",
-  "keywords": [ "timer", "express", "touchbar" ],
+  "keywords": [
+    "timer",
+    "express",
+    "touchbar"
+  ],
   "license": "MIT",
   "main": "dist/server.js",
   "repository": "pnlng/bartime",
