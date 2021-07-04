@@ -45,24 +45,15 @@ yarn install
 Then start the server. 
 
 ```sh
-node dist/server.js
+make serve
 ```
 
 #### Daemon & Login Item
 
-You may want to run BarTime as a daemon. In that case, you could use `forever.`
-
-```
-# npm
-npm install -g forever
-# OR yarn
-yarn global add forever
-```
-
-Then the included script `forever.sh` will run BarTime as a daemon. 
+You may want to run BarTime as a daemon. In that case, you could use 
 
 ```sh
-sh forever.sh
+make demon
 ```
 
 There are a few ways to launch the above script at login. 
