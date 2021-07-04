@@ -2,7 +2,6 @@ import { Response, Request } from 'express';
 import { Timer } from '../server';
 import config, { schema as configSchema } from '../utils/config';
 import * as boom from '@hapi/boom';
-import fromEntries from 'object.fromentries';
 
 export const start = async (req: Request, res: Response): Promise<Response> => {
   const { time } = req.params;
@@ -31,7 +30,7 @@ export const toggle = async (_: Request, res: Response) => {
 };
 
 export const getDefaultText = (_: Request, res: Response) => {
-  const text = config.get('defaultText') as string;
+  const text = config.get('defaultText');
   res.send(text);
 };
 
@@ -41,7 +40,6 @@ export const setConfig = (req: Request, res: Response) => {
     const fields = Object.keys(fieldValPairs);
     const fieldInSchema = (x: string) => Object.keys(configSchema).includes(x);
     fields.filter(fieldInSchema).forEach((field) => {
-      // @ts-ignore: Argument of type 'string' is not assignable to parameter of type...
       config.set(field, fieldValPairs[field]);
     });
     res.send({ message: 'Configurations set. ' });
@@ -52,7 +50,5 @@ export const setConfig = (req: Request, res: Response) => {
 
 export const getConfig = (_: Request, res: Response) => {
   const fields = Object.keys(configSchema);
-  // @ts-ignore
-  const currentConfigs = fromEntries(fields.map((x) => [ x, { value: config.get(x), ...configSchema[x] } ]));
-  res.send(currentConfigs);
+  res.send(Object.fromEntries(fields.map((x) => [ x, { value: config.get(x), ...configSchema[x] } ])));
 };

@@ -17,59 +17,68 @@ export type NotificationSound =
   | 'Submarine'
   | 'Tink';
 
-export type ConfigField = keyof typeof schema;
+export type ConfigField = keyof ConfSchema;
 
-export const schema = {
+interface ConfSchema {
+  uuid: string,
+  bttSecret: string,
+  port: number,
+  barLength: number,
+  useBtt: boolean,
+  notify: boolean,
+  notifySound: string | boolean,
+  defaultText: string,
+  defaultDuration: string,
+  refreshRate: number
+}
+
+type FieldTypes = 'boolean' | 'string' | 'number'
+
+export const schema: Record<keyof ConfSchema, {type: FieldTypes | FieldTypes[], default: unknown, minimum?: number, maximum?: number}> = {
   uuid: {
-    type: 'string' as 'string',
-    format: 'uuid' as 'uuid',
+    type: 'string',
     default: ''
   },
   bttSecret: {
-    type: 'string' as 'string',
+    type: 'string',
     default: ''
   },
   port: {
-    type: 'number' as 'number',
-    default: Number(process.env.PORT) || 4975,
+    type: 'number',
+    default: parseInt(process.env.PORT) || 4975,
     minimum: 1,
     maximum: 65535
   },
-  entryPoint: {
-    type: 'string' as 'string',
-    format: 'uri' as 'uri',
-    default: `http://localhost:${this.port}/bartime`
-  },
   barLength: {
-    type: 'number' as 'number',
-    mininum: 1,
+    type: 'number',
+    minimum: 1,
     default: 10
   },
   useBtt: {
-    type: 'boolean' as 'boolean',
+    type: 'boolean',
     default: true
   },
   notify: {
-    type: 'boolean' as 'boolean',
+    type: 'boolean',
     default: true
   },
   notifySound: {
-    type: 'boolean' as 'boolean',
+    type: ['string', 'boolean'],
     default: true
   },
   defaultText: {
-    type: 'string' as 'string',
+    type: 'string',
     default: '15m'
   },
   defaultDuration: {
-    type: 'string' as 'string',
+    type: 'string',
     default: '15m'
   },
   refreshRate: {
-    type: 'number' as 'number',
+    type: 'number',
     default: 10
   }
 };
-const config = new Conf({ schema, projectName: 'bartime' });
+const config = new Conf<ConfSchema>({ schema, projectName: 'bartime' });
 
 export default config;

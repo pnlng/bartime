@@ -32,20 +32,19 @@ export interface Notification {
   message: string;
   reply?: boolean | string;
   closeLabel?: string;
-  sound?: boolean | NotificationSound;
+  sound?: NotificationSound;
   timeout?: boolean | number;
 }
 
 export const notify = (notification: Notification) => {
-  const sound = config.get('notifySound') as NotificationSound;
+  const sound = config.get('notifySound');
   const defaultNotification = {
     sound,
     timeout: 20,
     closeLabel: 'Close'
   };
   const newNotification = { ...defaultNotification, ...notification };
-  // console.log(newNotification);
-  notifier.notify(newNotification, (e, _, __) => {
+  notifier.notify(newNotification, e => {
     if (e) console.error(e);
   });
   return;

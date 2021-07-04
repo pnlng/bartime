@@ -2,7 +2,6 @@ import config from '../utils/config';
 import moment, { Moment, Duration } from 'moment';
 import * as utils from '../utils';
 import * as btt from '../utils/btt';
-import notifier, { NotificationMetadata } from 'node-notifier';
 import * as boom from '@hapi/boom';
 import * as icons from '../assets/icons';
 
@@ -27,8 +26,8 @@ class TickOptions extends Object {
   constructor(totDur?: moment.Duration) {
     super();
     this.offsetDur = moment.duration();
-    this.useBtt = config.get('useBtt') as boolean;
-    this.notify = config.get('notify') as boolean;
+    this.useBtt = config.get('useBtt');
+    this.notify = config.get('notify');
     this.title = `Time's up!`;
     this.message = TickOptions.formatMessage(totDur);
   }
@@ -153,9 +152,9 @@ class BarTimer {
 
   protected updateBar = async (options?: OneOfTickOptions & { anew: boolean }): Promise<void> => {
     const { anew, ...tickOptions } = options;
-    const totChar = config.get('barLength') as number;
+    const totChar = config.get('barLength');
     const charInterval = Math.ceil(this.totMs / totChar);
-    const refreshInterval = (config.get('refreshRate') as number) * 1000;
+    const refreshInterval = (config.get('refreshRate')) * 1000;
     const interval = Math.min(charInterval, refreshInterval);
     const tock = () => this.tick(totChar);
     await this.reset({ anew });
@@ -190,7 +189,7 @@ class BarTimer {
 
   start = async (dur?: string, options?: OneOfTickOptions | {}) => {
     if (this.status === 'idle') {
-      const durStr = dur || (config.get('defaultDuration') as string);
+      const durStr = dur || (config.get('defaultDuration'));
       this.totDur = utils.parseTime(durStr);
       this.startMoment = moment();
       this.recentStartMoment = this.startMoment.clone();

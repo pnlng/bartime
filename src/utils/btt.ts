@@ -2,11 +2,10 @@ import config from './config';
 import * as icons from '../assets/icons';
 import * as boom from '@hapi/boom';
 import open from 'open';
-import 'url-search-params-polyfill';
 
 export const sendToBTT = async ({ text, iconData }: { text?: string; iconData?: string }) => {
-  const uuid = config.get('uuid') as string;
-  const bttSecret = config.get('bttSecret') as string;
+  const uuid = config.get('uuid');
+  const bttSecret = config.get('bttSecret');
   const baseUrl = 'btt://update_touch_bar_widget/';
   const searchParams = new URLSearchParams([ [ 'uuid', uuid ], [ 'sharedSecret', bttSecret ] ]);
   // don't want to send undefined as a param
@@ -28,5 +27,5 @@ export const sendToBTT = async ({ text, iconData }: { text?: string; iconData?: 
 
 export const resetBTT = async () => {
   const bttDefaultText = config.get('defaultText');
-  return await sendToBTT({ text: bttDefaultText as string, iconData: icons.defaultIcon });
+  return await sendToBTT({ text: bttDefaultText, iconData: icons.defaultIcon });
 };
